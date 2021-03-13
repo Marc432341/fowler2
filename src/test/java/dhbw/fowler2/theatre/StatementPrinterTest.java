@@ -10,6 +10,11 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Die Klasse StatementPrinterTest testet die Klasse
+ * TextStatemntPrinter
+ * @author nikla
+ */
 public class StatementPrinterTest {
 
     @Test
