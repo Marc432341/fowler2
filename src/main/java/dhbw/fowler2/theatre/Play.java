@@ -3,7 +3,6 @@ package dhbw.fowler2.theatre;
  * Die abstrakte Klasse Play repräsentiert ein Stück.
  * Die einzelnen Typen von Stücken werden durch Unterklassen
  * realisiert und dargestellt.
- * @author nikla
  */
 public abstract class Play {
 
