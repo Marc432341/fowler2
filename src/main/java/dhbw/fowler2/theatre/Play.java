@@ -1,12 +1,17 @@
 package dhbw.fowler2.theatre;
 
-public class Play {
+public abstract class Play {
 
     public String name;
-    public String type;
 
-    public Play(String name, String type) {
+    public Play(String name) {
         this.name = name;
-        this.type = type;
+    }
+    
+    abstract int calculateAmount(int audience);
+    abstract int calculateCredits(int audience);
+    
+    int baseCredits(int audience) {
+        return Math.max(audience - 30, 0);
     }
 }

@@ -4,6 +4,7 @@ import dhbw.fowler2.theatre.Play;
 import dhbw.fowler2.theatre.Performance;
 import dhbw.fowler2.theatre.StatementPrinter;
 import dhbw.fowler2.theatre.Invoice;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
@@ -13,16 +14,20 @@ public class StatementPrinterTest {
 
     @Test
     public void printsStatements() {
-        Map<String, Play> plays = Map.of("hamlet", new Play("Hamlet", "tragedy"),
-                "as-like", new Play("As You Like It", "comedy"),
-                "othello", new Play("Othello", "tragedy"));
+        /* Die Erzeugung der Stücke wird durch Polymophismus ersetzt. */
+        List<Play> plays = List.of(new TragedyPlay("Hamlet"),
+                                    new ComedyPlay("As You Like It"), 
+                                    new TragedyPlay("Othello") );
+        /*Hier wurde der String Customer durch ein Objekt vom Typ 
+        Customer ersetzt*/
+        Customer customer = new Customer("BigCo");
+        List<Performance> performances = List.of(new Performance(plays.get(0), 55),
+                new Performance(plays.get(1), 35),
+                new Performance(plays.get(2), 40));
+        Invoice invoice = new Invoice(customer, performances);
 
-        Invoice invoice = new Invoice("BigCo", List.of(new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40)));
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.print(invoice, plays);
+        StatementPrinter statementPrinter = new TextStatementPrinter();
+        var result = statementPrinter.print(invoice);
 
         Assert.assertEquals("Statement print mismatch", "Statement for BigCo\n" +
                 "  Hamlet: $650.00 (55 seats)\n" +
